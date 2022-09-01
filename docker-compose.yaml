@@ -1,0 +1,23 @@
+version: "3.9"
+services:
+  idtokenhint:
+    build:
+      context: 1-asp-net-core-api-idtokenhint
+      dockerfile: Dockerfile
+    ports:
+      - "5002:80"
+    volumes:
+      - type: bind
+        source: "${AZURE_VID_APP_SETTINGS}"
+        target: /app/appsettings.json
+        read_only: true
+      
+      - type: bind
+        source: "${AZURE_VID_ISSUANCE_REQ_CONFIG}"
+        target: /app/issuance_request_config.json
+        read_only: true
+      
+      - type: bind
+        source: "${AZURE_VID_PRESENTATION_REQ_CONFIG}"
+        target: /app/presentation_request_config.json
+        read_only: true
